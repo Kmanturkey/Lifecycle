@@ -1,67 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".LoggedInActivity">
+    tools:context=".LoggedInActivity"
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/logged_in_message"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="8dp"
+        />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/first_name_logged_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_below="@id/logged_in_message"
+        android:layout_marginTop="8dp"
+        android:layout_alignParentLeft="true"
+        android:text="First Name:"
+        />
 
-        <TextView
-            android:id="@+id/first_name_logged_in"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="First Name: " />
-
-        <TextView
-            android:id="@+id/first_name_logged"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <LinearLayout
+    <TextView
+        android:id="@+id/first_name_logged"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_below="@id/logged_in_message"
+        android:layout_toRightOf="@id/first_name_logged_in"
+        />
 
-        <TextView
-            android:id="@+id/middle_name_logged_in"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Middle Name: " />
-
-        <TextView
-            android:id="@+id/middle_name_logged"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <LinearLayout
+    <TextView
+        android:id="@+id/middle_name_logged_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/first_name_logged"
+        android:layout_alignParentLeft="true"
+        android:text="Middle Name:" />
 
-        <TextView
-            android:id="@+id/last_name_logged_in"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Last Name: " />
+    <TextView
+        android:id="@+id/middle_name_logged"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_below="@id/first_name_logged"
+        android:layout_toRightOf="@id/middle_name_logged_in"
+        />
 
-        <TextView
-            android:id="@+id/last_name_logged"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/last_name_logged_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/middle_name_logged"
+        android:layout_marginTop="8dp"
+        android:layout_alignParentLeft="true"
+        android:text="Last Name:" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/last_name_logged"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_below="@id/middle_name_logged"
+        android:layout_toRightOf="@id/last_name_logged_in"
+        />
+
+</RelativeLayout>

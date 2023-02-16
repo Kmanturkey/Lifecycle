@@ -6,7 +6,9 @@ import android.graphics.Bitmap
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.provider.MediaStore
+import android.text.Editable
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -26,7 +28,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private var mButtonSubmit: Button? = null
     private var mButtonPicture: Button? = null
     private var mPic: ImageView? = null
-
+    private var mLoggedInIntent: Intent? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -39,7 +41,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         mButtonSubmit!!.setOnClickListener(this)
         mButtonPicture!!.setOnClickListener(this)
-
+        mLoggedInIntent = Intent(this, LoggedInActivity::class.java)
+        Log.i("savedInstanceState", "$savedInstanceState")
+        if (savedInstanceState != null) {
+            mFirstEdit!!.setText(savedInstanceState.getString("savedFirstName"))
+            mFirstEdit!!.setText(savedInstanceState.getString("savedMiddleName"))
+            mLastEdit!!.setText(savedInstanceState.getString("savedLastName"))
+            Log.i("onRestore", "onRestoreInstanceState done")
+        }
     }
 
     override fun onClick(v: View) {
@@ -51,11 +60,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 if (mFirstName.isNullOrBlank() || mMiddleName.isNullOrBlank() || mLastName.isNullOrBlank()) {
                     Toast.makeText(this@MainActivity, "Must enter first, middle, or last name", Toast.LENGTH_SHORT).show()
                 } else {
-                    val messageIntent = Intent(this, LoggedInActivity::class.java)
-                    messageIntent.putExtra("FIRST_NAME_STRING", mFirstName)
-                    messageIntent.putExtra("MIDDLE_NAME_STRING", mMiddleName)
-                    messageIntent.putExtra("LAST_NAME_STRING", mLastName)
-                    this.startActivity(messageIntent)
+                    mLoggedInIntent!!.putExtra("FIRST_NAME_STRING", mFirstName)
+                    mLoggedInIntent!!.putExtra("MIDDLE_NAME_STRING", mMiddleName)
+                    mLoggedInIntent!!.putExtra("LAST_NAME_STRING", mLastName)
+                    startActivity(mLoggedInIntent)
                 }
             }
 
@@ -73,7 +81,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
-        outState.putString("", "")
+        outState.putString("savedFirstName", mFirstEdit!!.text.toString())
+        outState.putString("savedMiddleName", mMiddleEdit!!.text.toString())
+        outState.putString("savedLastName", mLastEdit!!.text.toString())
+        Log.i("onSave", "onSaveInstanceState done")
     }
 
     private val cameraActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
